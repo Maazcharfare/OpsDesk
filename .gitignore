@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+.opsdesk-test-runtime/
+.opsdesk-dev-runtime/
+.local-run/
+.pytest-tmp/
+pytest-of-*/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local OpsDesk database and backups
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+backups/
+*.pre-restore.bak
+deploy/certs/
+*.pem
+*.key
+*.p12
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

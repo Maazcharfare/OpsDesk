@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<meta name="description" content="OpsDesk IT operations, support ticket and service monitoring dashboard">
+<title>OpsDesk | IT Operations</title>
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">O</div>
+      <div><h1>OpsDesk</h1><p>IT operations workspace</p></div>
+    </div>
+    <nav class="topnav" aria-label="Main navigation">
+      <a href="#servicesSection">Services</a>
+      <a href="#ticketsSection">Tickets</a>
+      <a href="/docs">API docs</a>
+      <span class="environment">OPS WORKSPACE</span>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="page-heading">
+    <div><h2>Operations dashboard</h2><p class="subtext">Your support and service activity at a glance.</p></div>
+    <div class="page-date">Workspace overview · SQLite persistence</div>
+  </div>
+
+  <section class="summary-grid" aria-label="Ticket summary">
+    <article class="summary-card"><div><span class="summary-label">All tickets</span><strong class="summary-value" id="metricTotal">—</strong></div><span class="summary-icon" aria-hidden="true">#</span></article>
+    <article class="summary-card"><div><span class="summary-label">Open</span><strong class="summary-value" id="metricOpen">—</strong></div><span class="summary-icon" aria-hidden="true">○</span></article>
+    <article class="summary-card"><div><span class="summary-label">In progress</span><strong class="summary-value" id="metricProgress">—</strong></div><span class="summary-icon" aria-hidden="true">↗</span></article>
+    <article class="summary-card"><div><span class="summary-label">Resolved</span><strong class="summary-value" id="metricResolved">—</strong></div><span class="summary-icon" aria-hidden="true">✓</span></article>
+  </section>
+
+  <section class="card" id="servicesSection">
+    <div class="section-head"><div><h2>Service Monitoring</h2><p class="subtext">Manually check availability for registered public endpoints.</p></div><span class="count-pill">Manual checks</span></div>
+
+    <form id="serviceForm">
+      <label for="serviceName">Service name</label>
+      <input id="serviceName" required minlength="2" maxlength="100"
+             placeholder="Example Website">
+
+      <label for="serviceUrl">Public website/API URL</label>
+      <input id="serviceUrl" type="url" required maxlength="2048"
+             placeholder="https://example.com">
+
+      <button type="submit">Add service</button>
+    </form>
+
+    <div id="serviceMessage" class="message" role="status"
+         aria-live="polite"></div>
+    <div class="ticket-list-head"><h2>Registered services</h2><span class="count-pill" id="serviceCount">0 services</span></div>
+    <div id="services" aria-live="polite">Loading services...</div>
+  </section>
+
+  <section id="ticketsSection">
+  <div class="section-head"><div><h2>Support Tickets</h2><p class="subtext">Track requests, update progress, and keep work moving.</p></div></div>
+  <div class="layout">
+    <section class="card">
+      <h2>Create ticket</h2>
+      <form id="ticketForm">
+        <label for="title">Ticket title</label>
+        <input id="title" required minlength="3" maxlength="120"
+               placeholder="Laptop cannot connect to Wi-Fi">
+
+        <label for="description">Description</label>
+        <textarea id="description" maxlength="2000"
+                  placeholder="Describe the issue"></textarea>
+
+        <label for="priority">Priority</label>
+        <select id="priority">
+          <option>Low</option>
+          <option selected>Medium</option>
+          <option>High</option>
+          <option>Critical</option>
+        </select>
+
+        <button type="submit">Create ticket</button>
+      </form>
+      <div id="ticketMessage" class="message" role="status"
+           aria-live="polite"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-head"><div><h2>Ticket queue</h2><p class="subtext">Search, filter, and update your requests.</p></div><span class="count-pill" id="ticketCount">0 tickets</span></div>
+      <div class="ticket-controls">
+        <div><label for="ticketSearch">Search tickets</label><input id="ticketSearch" type="search" maxlength="120" placeholder="Search title or description"></div>
+        <div class="filter-field"><label for="statusFilter">Status</label><select id="statusFilter"><option value="">All statuses</option><option>Open</option><option>In Progress</option><option>Resolved</option></select></div>
+        <div class="filter-field"><label for="priorityFilter">Priority</label><select id="priorityFilter"><option value="">All priorities</option><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></div>
+      </div>
+      <div id="tickets" aria-live="polite">Loading tickets...</div>
+    </section>
+  </div>
+  </section>
+
+  <dialog id="editTicketDialog" aria-labelledby="editDialogTitle">
+    <form id="ticketEditForm">
+      <h2 id="editDialogTitle">Edit ticket</h2>
+      <p class="subtext">Update the ticket details and save your changes.</p>
+      <input id="editTicketId" type="hidden">
+      <label for="editTicketTitle">Title</label><input id="editTicketTitle" required minlength="3" maxlength="120">
+      <label for="editTicketDescription">Description</label><textarea id="editTicketDescription" maxlength="2000"></textarea>
+      <label for="editTicketPriority">Priority</label><select id="editTicketPriority"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select>
+      <div class="dialog-actions"><button class="secondary" id="cancelTicketEdit" type="button">Cancel</button><button id="saveTicketEdit" type="submit">Save changes</button></div>
+    </form>
+  </dialog>
+
+  <footer>OpsDesk <span aria-hidden="true">·</span> Local IT operations dashboard</footer>
+</main>
+
+<script src="/static/app.js" defer></script>
+</body>
+</html>
