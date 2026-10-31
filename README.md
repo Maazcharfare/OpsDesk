@@ -30,7 +30,7 @@ The security controls are part of the code, but they are not a substitute for an
 ## Technology
 
 - Python 3.12+
-- FastAPI, Uvicorn, HTTPX2
+- FastAPI, Uvicorn, HTTPX
 - SQLite
 - HTML, CSS, and browser JavaScript
 - Pytest and Ruff
